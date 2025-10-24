@@ -36,18 +36,15 @@ const LoginPage = ({ role }) => {
         if (role === "Student") {
             console.log("event",event.target.rollNumber)
             const rollNum = event.target.rollNumber.value;
-            const studentName = event.target.studentName.value;
             const password = event.target.password.value;
 
-            if (!rollNum || !studentName || !password) {
+            if (!rollNum  || !password) {
                 if (!rollNum) setRollNumberError(true);
-                if (!studentName) setStudentNameError(true);
                 if (!password) setPasswordError(true);
                 return;
             }
               const fields = {
         district: rollNum,         // backend expects 'district'
-        name: studentName,         // backend expects 'name'
         password
     };
             setLoader(true)
@@ -75,7 +72,6 @@ const LoginPage = ({ role }) => {
         if (name === 'email') setEmailError(false);
         if (name === 'password') setPasswordError(false);
         if (name === 'rollNumber') setRollNumberError(false);
-        if (name === 'studentName') setStudentNameError(false);
     };
 
     const guestModeHandler = () => {
@@ -89,8 +85,7 @@ const LoginPage = ({ role }) => {
         }
         else if (role === "Student") {
             const rollNum = "1"
-            const studentName = "Dipesh Awasthi"
-            const fields = { rollNum, studentName, password }
+            const fields = { rollNum, password }
             setGuestLoader(true)
             dispatch(loginUser(fields, role))
         }
@@ -144,11 +139,12 @@ const LoginPage = ({ role }) => {
                         }}
                     >
                         <Typography variant="h4" sx={{ mb: 2, color: "#2c2143" }}>
-                            {role} Login
+                            {/* Always display "District" instead of the actual role */}
+                            {role === "Student" ? "District" : role} Login
                         </Typography>
-                        <Typography variant="h7">
-                            Welcome back! Please enter your details
-                        </Typography>
+<Typography variant="h7">
+    Welcome back! Please enter your details
+</Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
                             {role === "Student" ? (
                                 <>
@@ -166,19 +162,7 @@ const LoginPage = ({ role }) => {
                                         helperText={rollNumberError && 'District is required'}
                                         onChange={handleInputChange}
                                     />
-                                    <TextField
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        id="studentName"
-                                        label="Enter your name"
-                                        name="studentName"
-                                        autoComplete="name"
-                                        autoFocus
-                                        error={studentNameError}
-                                        helperText={studentNameError && 'Name is required'}
-                                        onChange={handleInputChange}
-                                    />
+                                  
                                 </>
                             ) : (
                                 <TextField

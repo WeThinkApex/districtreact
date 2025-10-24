@@ -42,7 +42,7 @@ useEffect(() => {
   };
 
   
-  useEffect(() => {
+ useEffect(() => {
   if (status === "added" || status === "success") {
     setLoader(false);
     setNoticeTitle("");
@@ -52,24 +52,21 @@ useEffect(() => {
     setMessage("Notice submitted successfully!");
     setShowPopup(true);
 
-    if (onSuccess) {   // ✅ call only if prop is passed
+    if (onSuccess) {
       setTimeout(() => {
-        onSuccess();  // closes the form in the parent
+        onSuccess();
         setShowPopup(false);
       }, 1000);
     }
-     dispatch(underControl())
-   
+
+    dispatch(underControl()); // ✅ safe here
   } else if (status === "failed" || status === "error") {
     setLoader(false);
     setMessage(response || "Something went wrong!");
     setShowPopup(true);
   }
-}, [status, response, onSuccess]);
+}, [status, response, onSuccess, dispatch]);
 
-if (status === "added") {
-  dispatch(underControl());
-}
 
   return (
     <>

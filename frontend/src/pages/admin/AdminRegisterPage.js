@@ -92,10 +92,9 @@ const AdminRegisterPage = () => {
                             Admin Register
                         </Typography>
                         <Typography variant="h7">
-                            Create your own school by registering as an admin.
+                            Register as a district admin to manage and oversee all district-level operations efficiently.
                             <br />
-                            You will be able to add students and faculty and
-                            manage the system.
+                           
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
                             <TextField

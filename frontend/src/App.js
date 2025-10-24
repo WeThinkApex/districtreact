@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Homepage from './pages/Homepage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
+import DistrictDashboard from './pages/district/forms/districtDashboard'
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import LoginPage from './pages/LoginPage';
 import AdminRegisterPage from './pages/admin/AdminRegisterPage';
@@ -37,7 +38,7 @@ const App = () => {
 
       {currentRole === "Student" &&
         <>
-          <StudentDashboard />
+          <DistrictDashboard />
         </>
       }
 

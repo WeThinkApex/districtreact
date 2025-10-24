@@ -89,11 +89,11 @@ const AddStudent = ({ situation }) => {
             <div className="register">
                 <form className="registerForm" onSubmit={submitHandler}>
                     <span className="registerTitle">Add District</span>
-                    <label>Name</label>
+                    {/* <label>Name</label>
                     <input className="registerInput" type="text" placeholder="Enter name..."
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        autoComplete="name" required />
+                        autoComplete="name" required /> */}
 
                     {/* {
                         situation === "Student" &&
