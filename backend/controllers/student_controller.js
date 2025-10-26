@@ -66,11 +66,8 @@ const studentLogIn = async (req, res) => {
 
 const getStudents = async (req, res) => {
     try {
-        console.log("backend districts called");
         // Fetch districts created by a specific admin
-        console.log("req",req.params)
         let districts = await Student.find(); 
-        console.log("districrs",districts)// use adminID instead of school
         if (districts.length > 0) {
             let modifiedDistricts = districts.map((district) => {
                 return { ...district._doc, password: undefined }; // hide password if any

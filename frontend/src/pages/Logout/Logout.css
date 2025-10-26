@@ -1,0 +1,64 @@
+/* Main container */
+.logout-container {
+  width: 400px;
+  margin: 150px auto;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #f2ebff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Username heading */
+.logout-username {
+  color: #2d1b47;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Logout confirmation message */
+.logout-message {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* Button container */
+.logout-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Common button styles */
+.logout-btn {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Logout (red) button */
+.logout-confirm {
+  background-color: #ea0606;
+}
+
+.logout-confirm:hover {
+  background-color: #b10404;
+}
+
+/* Cancel (purple) button */
+.logout-cancel {
+  background-color: rgb(99, 60, 99);
+}
+
+.logout-cancel:hover {
+  background-color: rgb(78, 45, 78);
+}

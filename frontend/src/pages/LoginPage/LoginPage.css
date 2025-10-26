@@ -1,0 +1,60 @@
+/* Full Page Container */
+.login-container {
+  height: 100vh;
+}
+
+/* Left Form Section */
+.login-left-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Inner Box */
+.login-box {
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title */
+.login-title {
+  color: #2c2143;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Subtitle */
+.login-subtitle {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.login-form {
+  margin-top: 1rem;
+}
+
+/* Options Row */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Signup Section */
+.signup-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+/* Right Image Section */
+.login-right-section {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

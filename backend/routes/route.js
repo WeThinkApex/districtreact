@@ -24,6 +24,7 @@ const {
     removeStudentAttendance } = require('../controllers/student_controller.js');
 const { subjectCreate, classSubjects, deleteSubjectsByClass, getSubjectDetail, deleteSubject, freeSubjectList, allSubjects, deleteSubjects } = require('../controllers/subject-controller.js');
 const { teacherRegister, teacherLogIn, getTeachers, getTeacherDetail, deleteTeachers, deleteTeachersByClass, deleteTeacher, updateTeacherSubject, teacherAttendance } = require('../controllers/teacher-controller.js');
+const { saveFormData, getFormDataByDistrict } = require('../controllers/formController.js');
 
 // Admin
 router.post('/AdminReg', adminRegister);
@@ -33,6 +34,11 @@ router.get("/Admin/:id", getAdminDetail)
 // router.delete("/Admin/:id", deleteAdmin)
 
 // router.put("/Admin/:id", updateAdmin)
+// forms
+
+router.post("/api/forms/:formKey", saveFormData);
+router.get("/formdata/:district", getFormDataByDistrict);
+
 
 // Student
 

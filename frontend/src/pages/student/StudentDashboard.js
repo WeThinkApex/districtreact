@@ -5,7 +5,7 @@ import StudentProfile from './StudentProfile';
 import StudentSubjects from './StudentSubjects';
 import ViewStdAttendance from './ViewStdAttendance';
 import StudentComplain from './StudentComplain';
-import Logout from '../Logout';
+import Logout from '../Logout/Logout';
 import AccountMenu from '../../components/AccountMenu';
 import { AppBar } from '../../components/styles';
 

@@ -1,0 +1,96 @@
+/* Container covers full screen */
+.homepage-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+/* Full height grid */
+.homepage-grid {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Left image section */
+.homepage-image-section {
+  height: 100vh;
+  display: flex;
+}
+
+.homepage-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right section */
+.homepage-right-section {
+  height: 100vh;
+  background-color: #f9f6ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Centered content */
+.homepage-content-box {
+  width: 80%;
+  max-width: 500px;
+}
+
+/* Title styling */
+.homepage-title {
+  font-size: 3rem;
+  color: #252525;
+  font-weight: bold;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+/* Paragraph text */
+.homepage-text {
+  margin: 20px 0;
+  color: #333;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+/* Button box */
+.homepage-button-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+/* Links */
+.homepage-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.signup-link {
+  color: #550080;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .homepage-grid {
+    flex-direction: column;
+  }
+
+  .homepage-image-section,
+  .homepage-right-section {
+    height: 50vh;
+  }
+
+  .homepage-title {
+    font-size: 2rem;
+  }
+}

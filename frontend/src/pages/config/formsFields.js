@@ -1,5 +1,6 @@
+// src/config/formsFields.js
 export const formsFields = {
-  "Form 1 – Crime Data": [
+  crimeData: [
     { name: "crimeHead", label: "Crime Head", required: true },
     { name: "firNo", label: "FIR No", required: true },
     { name: "factsOfCase", label: "Facts of the Case", type: "textarea" },
@@ -8,7 +9,7 @@ export const formsFields = {
     { name: "legalProgress", label: "Legal Progress" },
   ],
 
-  "Form 2 – Non-Bailable Warrants": [
+  nonbailableWarrants: [
     { name: "pending", label: "Pending" },
     { name: "executedToday", label: "Executed Today" },
     { name: "oneWeekTotal", label: "1-Week Total" },
@@ -16,7 +17,7 @@ export const formsFields = {
     { name: "remarks", label: "Remarks", type: "textarea" },
   ],
 
-  "Form 3 – PD Act Proposals": [
+  actProposals: [
     { name: "caseNo", label: "Case No." },
     { name: "accusedProfile", label: "Accused Profile", type: "textarea" },
     { name: "crimeType", label: "Crime Type" },
@@ -25,8 +26,8 @@ export const formsFields = {
     { name: "remarks", label: "Remarks", type: "textarea" },
   ],
 
-  "Form 4 – Externment Actions": [
-    { name: "accusedGang", label: "Accused/Gang" },
+  externmentActions: [
+    { name: "accusedGang", label: "Accused / Gang" },
     { name: "activityProfile", label: "Activity Profile", type: "textarea" },
     { name: "legalGrounds", label: "Legal Grounds" },
     { name: "jurisdictionPS", label: "Jurisdiction PS" },
@@ -35,7 +36,7 @@ export const formsFields = {
     { name: "remarks", label: "Remarks", type: "textarea" },
   ],
 
-  "Form 5 – Sensitive / Political Cases": [
+  sensitivePoliticalCases: [
     { name: "firNo", label: "FIR No." },
     { name: "caseCategory", label: "Case Category" },
     { name: "crimeHead", label: "Crime Head" },
@@ -46,7 +47,7 @@ export const formsFields = {
     { name: "leadOfficer", label: "Lead Officer" },
   ],
 
-  "Form 6 – VC Productions": [
+  vcProductions: [
     { name: "noProduced", label: "No. Produced" },
     { name: "mode", label: "Mode" },
     { name: "courtsCovered", label: "Courts Covered" },
@@ -54,7 +55,7 @@ export const formsFields = {
     { name: "mitigationSteps", label: "Mitigation Steps", type: "textarea" },
   ],
 
-  "Form 7 – Important Cases": [
+  importantCases: [
     { name: "firNo", label: "FIR No." },
     { name: "dateAdded", label: "Date Added", type: "date" },
     { name: "todaysProgress", label: "Today’s Progress" },
@@ -63,7 +64,7 @@ export const formsFields = {
     { name: "nextReviewDate", label: "Next Review Date", type: "date" },
   ],
 
-  "Form 8 – CCTV Surveillance": [
+  cctvSurveillance: [
     { name: "installedToday", label: "Installed Today" },
     { name: "totalThisMonth", label: "Total This Month" },
     { name: "commandCentreIntegrated", label: "Command Centre Integrated" },
@@ -71,7 +72,7 @@ export const formsFields = {
     { name: "maintenanceIssues", label: "Maintenance Issues" },
   ],
 
-  "Form 9 – Cyber Crime Monitoring": [
+  cyberCrimeMonitoring: [
     { name: "complaintsToday", label: "Complaints Today" },
     { name: "firsRegistered", label: "FIRs Registered" },
     { name: "crimeType", label: "Crime Type" },
@@ -80,7 +81,7 @@ export const formsFields = {
     { name: "agencySupportRequired", label: "Agency Support Required" },
   ],
 
-  "Form 10 – Women’s Safety": [
+  womensSafety: [
     { name: "complaintType", label: "Complaint Type" },
     { name: "noReceived", label: "No. Received" },
     { name: "avgResponseTime", label: "Avg Response Time" },
@@ -89,7 +90,7 @@ export const formsFields = {
     { name: "communityFeedback", label: "Community Feedback" },
   ],
 
-  "Form 11 – Focus Area": [
+  focusArea: [
     { name: "date", label: "Date", type: "date" },
     { name: "theme", label: "Theme / Problem Area" },
     { name: "expectedResponse", label: "Expected Officer Response" },
@@ -97,7 +98,7 @@ export const formsFields = {
     { name: "gapsIdentified", label: "Gaps Identified" },
   ],
 
-  "Form 12 – Legal Monitoring": [
+  legalMonitoring: [
     { name: "caseName", label: "Case Name" },
     { name: "courtBench", label: "Court / Bench" },
     { name: "nextHearingDate", label: "Next Hearing Date", type: "date" },
@@ -105,12 +106,12 @@ export const formsFields = {
     { name: "policeActionRequired", label: "Police Action Required", type: "textarea" },
   ],
 
-  "Form 13 – DSR Summary": [
+  dsrSummary: [
     { name: "component", label: "Component" },
     { name: "highlights", label: "Highlights" },
   ],
 
-  "Form 14 – Fertilizer Monitoring": [
+  fertilizerMonitoring: [
     { name: "shortageCrisis", label: "Shortage / Crisis" },
     { name: "demandVsSupply", label: "Demand vs Supply" },
     { name: "casesRegistered", label: "Cases Registered" },

@@ -1,14 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import Homepage from './pages/Homepage';
-import AdminDashboard from './pages/admin/AdminDashboard';
+import Homepage from './pages/Homepage/Homepage';
+import AdminDashboard from './pages/admin/AdminDashboard/AdminDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
 import DistrictDashboard from './pages/district/forms/districtDashboard'
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 import AdminRegisterPage from './pages/admin/AdminRegisterPage';
-import ChooseUser from './pages/ChooseUser';
+import ChooseUser from './pages/ChooseUser/ChooseUser';
 
 const App = () => {
   const { currentRole } = useSelector(state => state.user);

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import GenericForm from "./GenericForm";
 import { formsFields } from "../../config/formsFields";
 import CloseIcon from "@mui/icons-material/Close";
+import { Modal, Fade, Backdrop } from "@mui/material";
+import { useSelector } from 'react-redux';
 import {
   Typography,
   Container,
@@ -19,16 +21,17 @@ import styled from "styled-components";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { formsConfig } from "../../config/formsConfig";
 import AccountMenu from "../../../components/AccountMenu";
-import Logout from "../../Logout";
+import Logout from "../../Logout/Logout";
 
 const DistrictDashboard = () => {
   const [selectedForm, setSelectedForm] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeForm, setActiveForm] = useState(null);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {
-    districtName: "Guntur",
-  };
+  // const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {
+  //   districtName: "Guntur",
+  // };
+const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     console.log("Current District User:", currentUser);
@@ -96,7 +99,7 @@ const DistrictDashboard = () => {
                 >
                   Welcome to{" "}
                   <span style={{ color: "#003366", fontWeight: 700 }}>
-                    {currentUser?.districtName || "Your District"}
+                    {currentUser?.district || "Your District"}
                   </span>{" "}
                   District 👮‍♂️
                 </Typography>
@@ -146,42 +149,52 @@ const DistrictDashboard = () => {
                 </StyledPaper>
 
                 {/* 🔹 Drawer for Form */}
-                <Drawer
-                  anchor="right"
-                  open={drawerOpen}
-                  onClose={handleDrawerClose}
-                  PaperProps={{
-                    sx: {
-                      width: { xs: "100%", sm: 500 },
-                      p: 3,
-                      backgroundColor: "#fafafa",
-                    },
-                  }}
-                >
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    mb={2}
-                  >
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: 600, color: "#002b5c" }}
-                    >
-                      {activeForm?.title || "Form"}
-                    </Typography>
-                    <IconButton onClick={handleDrawerClose}>
-                      <CloseIcon />
-                    </IconButton>
-                  </Box>
+         <Modal
+  open={drawerOpen}
+  onClose={handleDrawerClose}
+  closeAfterTransition
+  slots={{ backdrop: Backdrop }}
+  slotProps={{ backdrop: { timeout: 400 } }}
+>
+  <Fade in={drawerOpen} timeout={400}>
+    <Box
+      sx={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "90%",
+        maxWidth: "1000px",
+        bgcolor: "#f9fafb",
+        boxShadow: "0px 8px 24px rgba(0,0,0,0.15)",
+        borderRadius: 4,
+        p: 4,
+        maxHeight: "90vh",
+        overflowY: "auto",
+        border: "1px solid #e0e0e0",
+      }}
+    >
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h6" sx={{ fontWeight: 600, color: "#002b5c" }}>
+          {activeForm?.title || "Form"}
+        </Typography>
+        <IconButton onClick={handleDrawerClose}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
 
-                  {activeForm && (
-                  <GenericForm
-  formTitle={activeForm.title}
-  fields={formsFields[activeForm.title] || []}
-/>
-                  )}
-                </Drawer>
+      {activeForm && (
+        <GenericForm
+          formId={activeForm.id}
+          formTitle={activeForm.title}
+          handleDrawerClose={handleDrawerClose}
+        />
+      )}
+    </Box>
+  </Fade>
+</Modal>
+
+
               </Container>
             }
           />
