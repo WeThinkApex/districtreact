@@ -8,6 +8,7 @@ import Logout from '../../Logout/Logout';
 import SideBar from '../SideBar';
 import AdminProfile from '../AdminProfile';
 import AdminHomePage from '../AdminHomePage';
+import DistrictReportPage from "../AdminDashboard/DistrictReportPage";
 
 import AddStudent from '../studentRelated/AddStudent';
 import SeeComplains from '../studentRelated/SeeComplains';
@@ -81,7 +82,7 @@ const AdminDashboard = () => {
           <Route path="/Admin/dashboard" element={<AdminHomePage />} />
           <Route path="/Admin/profile" element={<AdminProfile />} />
           <Route path="/Admin/complains" element={<SeeComplains />} />
-
+<Route path="/districts/:districtName" element={<DistrictReportPage />} />
           {/* Notice */}
           <Route path="/Admin/addnotice" element={<AddNotice />} />
           <Route path="/Admin/notices" element={<ShowNotices />} />

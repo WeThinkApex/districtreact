@@ -17,7 +17,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStudents } from "../../redux/studentRelated/studentHandle";
-
+import { useNavigate } from "react-router-dom";
 const AdminHomePage = () => {
   const dispatch = useDispatch();
   const { studentsList } = useSelector((state) => state.student);
@@ -40,39 +40,49 @@ const AdminHomePage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 🟩 Fetch form data from backend
-  const fetchFormData = async (district, date) => {
-    if (!district) return;
-    setLoading(true);
-    setError("");
-    setFormData([]);
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/formdata/${district}?date=${date}`
-      );
 
-      if (!res.ok) throw new Error("Failed to fetch form data");
+  const navigate = useNavigate();
 
-      const data = await res.json();
+const handleOpen = (district) => {
+  navigate(`/districts/${encodeURIComponent(district)}`);
+};
 
-      if (data && data.length > 0) {
-        setFormData(data);
-      } else {
-        setFormData([]);
-      }
-    } catch (err) {
-      console.error("❌ Error fetching form data:", err);
-      setError("Unable to load data. Please try again later.");
-    } finally {
-      setLoading(false);
+// 🟩 Fetch form data from backend
+const fetchFormData = async (district, date) => {
+  if (!district) return;
+  setLoading(true);
+  setError("");
+  setFormData([]);
+
+  try {
+    const res = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/formdata/${district}?date=${date}`
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch form data");
+
+    const data = await res.json();
+    console.log("Response:", data);
+
+    if (data && data.length > 0) {
+      setFormData(data); // ✅ now array directly
+    } else {
+      setFormData([]);
     }
-  };
+  } catch (err) {
+    console.error("❌ Error fetching form data:", err);
+    setError("Unable to load data. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const handleOpen = (district) => {
-    setSelectedDistrict(district);
-    setOpenModal(true);
-    fetchFormData(district, selectedDate);
-  };
+
+  // const handleOpen = (district) => {
+  //   setSelectedDistrict(district);
+  //   setOpenModal(true);
+  //   fetchFormData(district, selectedDate);
+  // };
 
   const handleClose = () => {
     setOpenModal(false);
@@ -217,23 +227,28 @@ const AdminHomePage = () => {
             ) : (
               <Box>
                 {formData.map((form, idx) => (
-                  <Paper
-                    key={idx}
-                    sx={{
-                      p: 2,
-                      mb: 2,
-                      borderLeft: "6px solid #0073e6",
-                      borderRadius: 2,
-                    }}
-                  >
-                    <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-                      {form.formName}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Status: {form.status}
-                    </Typography>
-                  </Paper>
-                ))}
+  <Paper key={idx} sx={{ p: 2, mb: 2, borderLeft: "6px solid #0073e6", borderRadius: 2 }}>
+    <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+      {form.formName}
+    </Typography>
+    <Typography variant="body2" color="textSecondary">
+      Entries: {form.totalEntries}
+    </Typography>
+    <Typography variant="body2" color="textSecondary">
+      Date: {form.createdDate}
+    </Typography>
+
+    {/* ✅ Show inner fields */}
+    <Box mt={1}>
+      {form.formData && Object.entries(form.formData).map(([key, value]) => (
+        <Typography key={key} variant="body2">
+          <strong>{key}:</strong> {value?.toString()}
+        </Typography>
+      ))}
+    </Box>
+  </Paper>
+))}
+
               </Box>
             )}
           </Box>

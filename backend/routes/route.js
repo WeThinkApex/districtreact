@@ -37,7 +37,7 @@ router.get("/Admin/:id", getAdminDetail)
 // forms
 
 router.post("/api/forms/:formKey", saveFormData);
-router.get("/formdata/:district", getFormDataByDistrict);
+router.get("/api/formdata/:district", getFormDataByDistrict);
 
 
 // Student
