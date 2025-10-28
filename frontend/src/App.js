@@ -7,7 +7,7 @@ import StudentDashboard from './pages/student/StudentDashboard';
 import DistrictDashboard from './pages/district/forms/districtDashboard'
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import LoginPage from './pages/LoginPage/LoginPage';
-import AdminRegisterPage from './pages/admin/AdminRegisterPage';
+import AdminRegisterPage from './pages/admin/AdminRegisterPage/AdminRegisterPage';
 import ChooseUser from './pages/ChooseUser/ChooseUser';
 
 const App = () => {

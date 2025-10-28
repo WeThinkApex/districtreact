@@ -1,0 +1,76 @@
+/* Container for the attendance table */
+.attendance-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  margin-bottom: 80px;
+}
+
+/* Main title */
+.attendance-title {
+  font-weight: 600;
+  color: #1a237e;
+}
+
+/* Table styling */
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Button for expanding details */
+.details-button {
+  background-color: #1e88e5 !important;
+  color: #fff !important;
+  font-weight: 500;
+  text-transform: none;
+  transition: all 0.3s ease;
+}
+
+.details-button:hover {
+  background-color: #1565c0 !important;
+  transform: scale(1.05);
+}
+
+/* Overall percentage */
+.overall-percentage {
+  text-align: right;
+  font-weight: 600;
+  color: #3949ab;
+  margin-top: 16px;
+}
+
+/* Chart container */
+.chart-container {
+  margin-top: 24px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Loading text */
+.loading-text {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 1.2rem;
+  color: #5c6bc0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .attendance-container {
+    padding: 16px;
+  }
+
+  .attendance-title {
+    font-size: 1.3rem;
+  }
+
+  .overall-percentage {
+    text-align: center;
+    margin-top: 20px;
+  }
+}

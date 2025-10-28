@@ -1,0 +1,55 @@
+.admin-register-container {
+  height: 100vh;
+}
+
+.admin-register-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.admin-register-box {
+  margin: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-title {
+  margin-bottom: 10px;
+  color: #2c2143;
+  font-weight: bold;
+}
+
+.admin-subtitle {
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.admin-form {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.remember-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-link-container {
+  margin-top: 1rem;
+  color: #444;
+}
+
+.login-link {
+  text-decoration: none;
+  color: #7f56da;
+  transition: color 0.3s ease;
+}
+
+.login-link:hover {
+  color: #532fbf;
+  text-decoration: underline;
+}

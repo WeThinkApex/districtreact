@@ -1,0 +1,49 @@
+/* Main container centers the form on the page */
+.complain-main-container {
+  flex: 1 1 auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #f7faff; /* Light blue background */
+  min-height: 100vh;
+}
+
+/* Inner form box */
+.complain-inner-box {
+  max-width: 550px;
+  width: 100%;
+  padding: 100px 24px;
+  background-color: #ffffff; /* White card */
+  border-radius: 16px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add hover effect */
+.complain-inner-box:hover {
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Title styling */
+.complain-title {
+  color: #1976d2; /* MUI blue */
+  font-weight: 600;
+  text-align: center;
+}
+
+/* TextField spacing */
+.MuiTextField-root {
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Button animation */
+.MuiButton-root {
+  font-weight: 600;
+  text-transform: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.MuiButton-root:hover {
+  transform: scale(1.03);
+}
