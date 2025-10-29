@@ -1,0 +1,43 @@
+.account-box {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.account-avatar {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.menu-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  margin-left: -4px;
+  margin-right: 8px;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+.account-menu-paper {
+  overflow: visible !important;
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.32));
+  margin-top: 12px;
+  position: relative;
+}
+
+.account-menu-paper::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  transform: translateY(-50%) rotate(45deg);
+  z-index: 0;
+}

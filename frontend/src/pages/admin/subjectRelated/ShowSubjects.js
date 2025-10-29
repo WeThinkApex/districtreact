@@ -8,7 +8,7 @@ import {
     Paper, Box, IconButton,
 } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
-import TableTemplate from '../../../components/TableTemplate';
+import TableTemplate from '../../../components/TableTemplate/TableTemplate';
 import { BlueButton, GreenButton } from '../../../components/buttonStyles';
 import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
 import Popup from '../../../components/Popup';

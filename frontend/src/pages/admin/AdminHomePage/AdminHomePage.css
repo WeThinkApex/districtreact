@@ -1,0 +1,110 @@
+.page-title {
+  font-weight: 700 !important;
+  margin-bottom: 24px !important;
+  color: #002b5c !important;
+  text-align: center;
+}
+
+.no-districts {
+  text-align: center;
+  width: 100%;
+  margin-top: 40px !important;
+  color: gray;
+}
+
+.district-card {
+  padding: 24px;
+  border-radius: 16px !important;
+  text-align: center;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+}
+
+.district-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 115, 230, 0.2) !important;
+}
+
+.district-icon {
+  font-size: 40px !important;
+  color: #0073e6;
+  margin-bottom: 8px;
+}
+
+.district-name {
+  font-weight: 600 !important;
+}
+
+.district-text {
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Modal Styling */
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 900px;
+  background-color: white;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 32px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-weight: 700 !important;
+  color: #002b5c !important;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.calendar-icon {
+  color: #0073e6;
+}
+
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.error-text {
+  text-align: center;
+  padding: 32px;
+}
+
+.no-data-text {
+  text-align: center;
+  color: gray;
+  padding: 32px;
+}
+
+.form-card {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-left: 6px solid #0073e6;
+  border-radius: 12px !important;
+}
+
+.form-name {
+  font-weight: 600 !important;
+}

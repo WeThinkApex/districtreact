@@ -1,0 +1,56 @@
+.table-wrapper {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.table-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header Styles */
+.table-header-row {
+  background-color: #4a3aff;
+  color: white;
+  text-transform: uppercase;
+}
+
+.table-header-cell {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 16px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Row Styles */
+.table-row {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.table-row:hover {
+  background-color: #f6f6ff;
+}
+
+/* Cell Styles */
+.table-cell {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.action-cell {
+  text-align: center;
+}
+
+.table-pagination {
+  margin-top: 12px;
+}

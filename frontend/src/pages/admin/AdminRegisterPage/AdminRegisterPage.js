@@ -20,7 +20,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LightPurpleButton } from '../../../components/buttonStyles';
 import { registerUser } from '../../../redux/userRelated/userHandle';
 import Popup from '../../../components/Popup';
-import bgpic from "../../../assets/login-registration-slide.jpg";
+import bgpic from "../../../assets/registration-slide.jpg";
 import './AdminRegisterPage.css'; // 👈 CSS file import
 
 const defaultTheme = createTheme();

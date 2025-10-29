@@ -11,7 +11,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { resetSubjects } from "../../../redux/sclassRelated/sclassSlice";
 import { BlueButton, GreenButton, PurpleButton } from "../../../components/buttonStyles";
-import TableTemplate from "../../../components/TableTemplate";
+import TableTemplate from "../../../components/TableTemplate/TableTemplate";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import SpeedDialTemplate from "../../../components/SpeedDialTemplate";

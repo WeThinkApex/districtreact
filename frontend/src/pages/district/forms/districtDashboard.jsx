@@ -20,7 +20,7 @@ import {
 import styled from "styled-components";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { formsConfig } from "../../config/formsConfig";
-import AccountMenu from "../../../components/AccountMenu";
+import AccountMenu from "../../../components/AccountMenu/AccountMenu";
 import Logout from "../../Logout/Logout";
 
 const DistrictDashboard = () => {
@@ -89,7 +89,7 @@ const { currentUser } = useSelector((state) => state.user);
                     fontWeight: 700,
                   }}
                 >
-                  🏛️ Andhra Pradesh Police – DSR Portal
+                  Andhra Pradesh Police – DSR Portal
                 </Typography>
 
                 <Typography
@@ -101,7 +101,7 @@ const { currentUser } = useSelector((state) => state.user);
                   <span style={{ color: "#003366", fontWeight: 700 }}>
                     {currentUser?.district || "Your District"}
                   </span>{" "}
-                  District 👮‍♂️
+                  District
                 </Typography>
 
                 {/* Buttons Grid */}
@@ -209,10 +209,10 @@ const { currentUser } = useSelector((state) => state.user);
 /* 🎨 Styled Components */
 const StyledButton = styled(Button)`
   padding: 16px 10px !important;
-  border-radius: 12px !important;
+  border-radius: 50px !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  font-size: 14.5px !important;
+  font-size: 17.5px !important;
   height: 80px;
   transition: all 0.25s ease-in-out !important;
 

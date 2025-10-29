@@ -4,7 +4,7 @@ import {
   Paper, Box, Checkbox
 } from '@mui/material';
 import { getAllComplains } from '../../../redux/complainRelated/complainHandle';
-import TableTemplate from '../../../components/TableTemplate';
+import TableTemplate from '../../../components/TableTemplate/TableTemplate';
 
 const SeeComplains = () => {
 

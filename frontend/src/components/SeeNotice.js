@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNotices } from '../redux/noticeRelated/noticeHandle';
 import { Paper } from '@mui/material';
-import TableViewTemplate from './TableViewTemplate';
+import TableViewTemplate from './TableViewTemplate/TableViewTemplate';
 
 const SeeNotice = () => {
     const dispatch = useDispatch();

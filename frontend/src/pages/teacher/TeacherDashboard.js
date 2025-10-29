@@ -13,7 +13,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TeacherSideBar from './TeacherSideBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Logout from '../Logout/Logout'
-import AccountMenu from '../../components/AccountMenu';
+import AccountMenu from '../../components/AccountMenu/AccountMenu';
 import { AppBar, Drawer } from '../../components/styles';
 import StudentAttendance from '../admin/studentRelated/StudentAttendance';
 

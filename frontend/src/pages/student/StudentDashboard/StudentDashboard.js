@@ -6,7 +6,7 @@ import StudentSubjects from '../StudentSubjects';
 import ViewStdAttendance from '../ViewStdAttendance/ViewStdAttendance';
 import StudentComplain from '../../student/StudentComplain/StudentComplain';
 import Logout from '../../Logout/Logout';
-import AccountMenu from '../../../components/AccountMenu';
+import AccountMenu from '../../../components/AccountMenu/AccountMenu';
 import { AppBar } from '../../../components/styles';
 import './StudentDashboard.css'; // <-- CSS import
 

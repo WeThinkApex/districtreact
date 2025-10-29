@@ -5,9 +5,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { AppBar, Drawer } from '../../../components/styles';
 import Logout from '../../Logout/Logout';
-import SideBar from '../SideBar';
-import AdminProfile from '../AdminProfile';
-import AdminHomePage from '../AdminHomePage';
+import SideBar from '../SideBar/SideBar';
+import AdminProfile from '../AdminProfile/AdminProfile';
+import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import DistrictReportPage from "../AdminDashboard/DistrictReportPage";
 
 import AddStudent from '../studentRelated/AddStudent';
@@ -33,7 +33,7 @@ import TeacherDetails from '../teacherRelated/TeacherDetails';
 import AddClass from '../classRelated/AddClass';
 import ClassDetails from '../classRelated/ClassDetails';
 import ShowClasses from '../classRelated/ShowClasses';
-import AccountMenu from '../../../components/AccountMenu';
+import AccountMenu from '../../../components/AccountMenu/AccountMenu';
 
 import '../AdminDashboard/AdminDashboard.css'; // ✅ Import external CSS
 

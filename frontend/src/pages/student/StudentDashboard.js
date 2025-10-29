@@ -6,7 +6,7 @@ import StudentSubjects from './StudentSubjects';
 import ViewStdAttendance from './ViewStdAttendance';
 import StudentComplain from './StudentComplain';
 import Logout from '../Logout/Logout';
-import AccountMenu from '../../components/AccountMenu';
+import AccountMenu from '../../components/AccountMenu/AccountMenu';
 import { AppBar } from '../../components/styles';
 
 const StudentDashboard = () => {
