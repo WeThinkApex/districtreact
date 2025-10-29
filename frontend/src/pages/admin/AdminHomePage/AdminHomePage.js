@@ -1,197 +1,179 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Typography,
   Container,
   Grid,
-  Paper,
-  Typography,
   Box,
-  Modal,
-  Fade,
-  Backdrop,
-  TextField,
-  CircularProgress,
+  Toolbar,
+  CssBaseline,
+  AppBar,
   Button,
 } from "@mui/material";
-import { CalendarMonth, LocationOn, Close } from "@mui/icons-material";
-import dayjs from "dayjs";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllStudents } from "../../../redux/studentRelated/studentHandle";
-import { useNavigate } from "react-router-dom";
-import "./AdminHomePage.css"; // ✅ Import external CSS
+import styled from "styled-components";
+import { useNavigate, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { formsConfig } from "../../config/formsConfig";
+import AccountMenu from "../../../components/AccountMenu/AccountMenu";
+import Logout from "../../Logout/Logout";
 
 const AdminHomePage = () => {
-  const dispatch = useDispatch();
-  const { studentsList } = useSelector((state) => state.student);
+  const [selectedForm, setSelectedForm] = useState("");
   const { currentUser } = useSelector((state) => state.user);
-  const adminID = currentUser._id;
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getAllStudents(adminID));
-  }, [adminID, dispatch]);
+    console.log("Current District User:", currentUser);
+  }, [currentUser]);
 
-  const districts = [
-    ...new Set(studentsList?.map((student) => student.district).filter(Boolean)),
-  ];
-
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedDistrict, setSelectedDistrict] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(dayjs().format("YYYY-MM-DD"));
-  const [formData, setFormData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleOpen = (district) => {
-    navigate(`/districts/${encodeURIComponent(district)}`);
+  // ✅ When user clicks a form button, go to its dedicated page
+  const handleFormClick = (form) => {
+    setSelectedForm(form.title);
+    navigate(`/form/${form.id}`);
   };
 
-  const fetchFormData = async (district, date) => {
-    if (!district) return;
-    setLoading(true);
-    setError("");
-    setFormData([]);
-
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/formdata/${district}?date=${date}`
-      );
-      if (!res.ok) throw new Error("Failed to fetch form data");
-
-      const data = await res.json();
-      setFormData(data.length ? data : []);
-    } catch (err) {
-      console.error("❌ Error fetching form data:", err);
-      setError("Unable to load data. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleClose = () => {
-    setOpenModal(false);
-    setFormData([]);
-  };
-
-  const handleDateChange = (e) => {
-    const date = e.target.value;
-    setSelectedDate(date);
-    fetchFormData(selectedDistrict, date);
-  };
+  // ✅ Only first 14 forms are shown as per your design
+  const filteredForms = formsConfig.slice(0, 14);
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-      <Typography
-        variant="h5"
-        className="page-title"
-      >
-        📍 District Overview Dashboard
-      </Typography>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
 
-      <Grid container spacing={3}>
-        {districts.length === 0 ? (
-          <Typography className="no-districts">
-            ⚠️ No districts found yet in the database.
+      {/* 🔹 Top Bar */}
+      <AppBar position="absolute" sx={{ backgroundColor: "#002b5c" }}>
+        <Toolbar sx={{ pr: "24px" }}>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
+            District Dashboard
           </Typography>
-        ) : (
-          districts.map((district, index) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-              <Paper
-                elevation={4}
-                className="district-card"
-                onClick={() => handleOpen(district)}
-              >
-                <Box display="flex" flexDirection="column" alignItems="center">
-                  <LocationOn className="district-icon" />
-                  <Typography variant="h6" className="district-name">
-                    {district}
-                  </Typography>
-                  <Typography variant="body2" className="district-text">
-                    Click to view reports
-                  </Typography>
-                </Box>
-              </Paper>
-            </Grid>
-          ))
-        )}
-      </Grid>
+          <AccountMenu />
+        </Toolbar>
+      </AppBar>
 
-      {/* Modal */}
-      <Modal
-        open={openModal}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{ backdrop: { timeout: 500 } }}
-      >
-        <Fade in={openModal}>
-          <Box className="modal-box">
-            <Box className="modal-header">
-              <Typography variant="h6" className="modal-title">
-                🏛️ {selectedDistrict} District Report
-              </Typography>
-              <Button onClick={handleClose}>
-                <Close />
-              </Button>
-            </Box>
+      {/* 🔹 Main Content */}
+      <Box component="main" sx={styles.boxStyled}>
+        <Toolbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Container maxWidth="lg" sx={{ mt: 1, mb: 5 }}>
+                {/* Header */}
+                <Typography
+                  variant="h4"
+                  sx={{
+                    mb: 3,
+                    textAlign: "center",
+                    color: "#002b5c",
+                    fontWeight: 700,
+                  }}
+                >
+                  🏛️ Andhra Pradesh Police – DSR Portal
+                </Typography>
 
-            <Box className="date-filter">
-              <Box display="flex" alignItems="center" gap={1}>
-                <CalendarMonth className="calendar-icon" />
-                <TextField
-                  type="date"
-                  size="small"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                />
-              </Box>
-              <Typography variant="body2" color="textSecondary">
-                Showing data for: <b>{selectedDate}</b>
-              </Typography>
-            </Box>
+                {/* Buttons Grid */}
+                <Grid
+                  container
+                  spacing={3}
+                  justifyContent="center"
+                  alignItems="stretch"
+                >
+                  {filteredForms.map((form, index) => (
+                    <Grid item xs={12} sm={6} md={3} key={form.id}>
+                      <StyledButton
+                        color={colorCycle[index % colorCycle.length]}
+                        variant="contained"
+                        fullWidth
+                        onClick={() => handleFormClick(form)}
+                      >
+                        {form.title}
+                      </StyledButton>
+                    </Grid>
+                  ))}
+                </Grid>
 
-            {loading ? (
-              <Box className="loading-box">
-                <CircularProgress />
-              </Box>
-            ) : error ? (
-              <Typography color="error" className="error-text">
-                {error}
-              </Typography>
-            ) : formData.length === 0 ? (
-              <Typography className="no-data-text">
-                ⚠️ No form data found for this date.
-              </Typography>
-            ) : (
-              <Box>
-                {formData.map((form, idx) => (
-                  <Paper key={idx} className="form-card">
-                    <Typography variant="subtitle1" className="form-name">
-                      {form.formName}
+                {/* Info Section */}
+                <StyledPaper elevation={3}>
+                  {selectedForm ? (
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textAlign: "center",
+                        color: "#1a237e",
+                        fontWeight: 600,
+                      }}
+                    >
+                      You selected: {selectedForm}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Entries: {form.totalEntries}
+                  ) : (
+                    <Typography
+                      variant="h6"
+                      sx={{ textAlign: "center", color: "#6c757d" }}
+                    >
+                      Please select a form to get started.
                     </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Date: {form.createdDate}
-                    </Typography>
-
-                    <Box mt={1}>
-                      {form.formData &&
-                        Object.entries(form.formData).map(([key, value]) => (
-                          <Typography key={key} variant="body2">
-                            <strong>{key}:</strong> {value?.toString()}
-                          </Typography>
-                        ))}
-                    </Box>
-                  </Paper>
-                ))}
-              </Box>
-            )}
-          </Box>
-        </Fade>
-      </Modal>
-    </Container>
+                  )}
+                </StyledPaper>
+              </Container>
+            }
+          />
+          {/* Logout Route */}
+          <Route path="/logout" element={<Logout />} />
+          {/* Redirect any invalid routes back to home */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Box>
+    </Box>
   );
+};
+
+/* 🎨 Styled Components */
+const StyledButton = styled(Button)`
+  padding: 16px 10px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  font-size: 14.5px !important;
+  height: 80px;
+  transition: all 0.25s ease-in-out !important;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const StyledPaper = styled(Box)`
+  padding: 24px;
+  margin-top: 40px;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+`;
+
+/* 🌈 Button Colors */
+const colorCycle = [
+  "primary",
+  "secondary",
+  "success",
+  "info",
+  "warning",
+  "error",
+];
+
+/* 💅 Styles */
+const styles = {
+  boxStyled: {
+    backgroundColor: "#f4f6f9",
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+    paddingBottom: "40px",
+  },
 };
 
 export default AdminHomePage;

@@ -60,3 +60,44 @@
   overflow: auto;
   background-color: #f5f5f5; /* light mode fallback */
 }
+
+
+/* Drawer */
+.drawer-open {
+  width: 240px;                /* ✅ fully open width */
+  transition: width 0.3s ease;
+  white-space: nowrap;
+  overflow-x: hidden;
+  background-color: #002b5c;   /* nice dark blue */
+  color: #fff;
+}
+
+.drawer-close {
+  width: 60px;                 /* ✅ collapsed width */
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  background-color: #002b5c;
+  color: #fff;
+}
+
+.drawer-open .MuiListItemText-root {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.drawer-close .MuiListItemText-root {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Adjust AppBar position when drawer is open */
+.admin-appbar.open {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  transition: all 0.3s ease;
+}
+
+.admin-appbar {
+  width: 100%;
+  transition: all 0.3s ease;
+}

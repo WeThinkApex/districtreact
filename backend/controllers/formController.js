@@ -91,56 +91,93 @@ const getFormDataByDistrict = async (req, res) => {
 
     const formattedDate = date ? dayjs(date).format("YYYY-MM-DD") : dayjs().format("YYYY-MM-DD");
     let allResults = [];
-console.log("form",formattedDate)
+
     for (const formKey of allowedForms) {
       const FormModel = getFormModel(formKey);
 
-      // ✅ Check if collection exists
+      // Check if collection exists
       const collections = await mongoose.connection.db
         .listCollections({ name: formKey.toLowerCase() })
         .toArray();
       if (collections.length === 0) continue;
 
-      // ✅ Match string date instead of date object
+      // Find all records for this district and date
       const records = await FormModel.find({
-          createdBy: district,
+        createdBy: district,
         createdDate: formattedDate,
       }).sort({ createdAt: -1 });
-console.log("resorndss lease",records);
-
-
-
-
-
 
       if (records.length > 0) {
         allResults.push({
           formKey,
-          total: records.length,
-          latestEntry: records[0],
+          entries: records.map((rec) => ({
+            id: rec._id,
+            formTitle: rec.formTitle,
+            createdDate: rec.createdDate,
+            formData: rec.formData,
+          })),
         });
       }
     }
 
     if (allResults.length === 0) {
-      return res.status(200).json([]); // empty array if no data
+      return res.status(200).json([]); // no data
     }
 
-  const responseData = allResults.map((r) => ({
-  formName: r.latestEntry.formTitle || r.formKey,
-  formKey: r.formKey,
-  totalEntries: r.total,
-  createdDate: r.latestEntry.createdDate,
-  formData: r.latestEntry.formData,  // <—— added
-}));
-
-
-    return res.status(200).json(responseData);
+    return res.status(200).json(allResults);
   } catch (err) {
     console.error("Error in getFormDataByDistrict:", err);
     res.status(500).json({ success: false, message: "Server Error", error: err.message });
   }
 };
 
+const getFormDataByFormKey = async (req, res) => {
+  try {
+    const { formKey } = req.params;
 
-module.exports = { saveFormData, getFormDataByDistrict };
+    if (!formKey) {
+      return res.status(400).json({ success: false, message: "Form key is required" });
+    }
+
+    if (!allowedForms.includes(formKey)) {
+      return res.status(400).json({ success: false, message: "Invalid form key" });
+    }
+
+    const FormModel = getFormModel(formKey);
+
+    // ✅ Check if the collection exists in MongoDB before querying
+    const collections = await mongoose.connection.db
+      .listCollections({ name: formKey.toLowerCase() })
+      .toArray();
+
+    if (collections.length === 0) {
+      return res.status(200).json([]); // Return empty array if collection doesn't exist
+    }
+
+    // ✅ Fetch all form data entries
+    const formEntries = await FormModel.find().sort({ createdAt: -1 });
+
+    if (!formEntries || formEntries.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    // ✅ Send formatted response
+  res.status(200).json(
+  formEntries.map((entry) => ({
+    id: entry._id,
+    districtId: entry.districtId,
+    formKey: entry.formKey,
+    formTitle: entry.formTitle,
+    createdBy: entry.createdBy,
+    createdDate: entry.createdDate,
+    formData: entry.formData,
+  }))
+);
+  } catch (err) {
+    console.error("Error in getFormDataByFormKey:", err);
+    res.status(500).json({ success: false, message: "Server error", error: err.message });
+  }
+};
+
+
+module.exports = { saveFormData, getFormDataByDistrict ,getFormDataByFormKey};

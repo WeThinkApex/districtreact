@@ -16,7 +16,7 @@ import {
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { formsConfig } from "../../config/formsConfig";
-import { formsFields } from "../../config/formsFields"; // ✅ use label mapping
+import { formsFields } from "../../config/formsFields";
 
 const DistrictReportPage = () => {
   const { districtName } = useParams();
@@ -25,7 +25,7 @@ const DistrictReportPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // ✅ Fetch form data
+  // Fetch form data
   const fetchFormData = async (district, date) => {
     setLoading(true);
     setError("");
@@ -52,9 +52,6 @@ const DistrictReportPage = () => {
 
   const handleDateChange = (e) => setSelectedDate(e.target.value);
 
-  const getFormDataByKey = (formKey) =>
-    formData.find((f) => f.formKey === formKey);
-
   const getLabel = (formKey, fieldName) => {
     const formFields = formsFields[formKey];
     const field = formFields?.find((fld) => fld.name === fieldName);
@@ -65,13 +62,7 @@ const DistrictReportPage = () => {
     <Container maxWidth="xl" sx={{ mt: 5, mb: 5 }}>
       {/* Header */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
-        <Typography
-          variant="h5"
-          sx={{
-            fontWeight: 700,
-            color: "#2F3E46",
-          }}
-        >
+        <Typography variant="h5" sx={{ fontWeight: 700, color: "#2F3E46" }}>
           📋 {districtName} District – Daily Report
         </Typography>
         <TextField
@@ -79,14 +70,11 @@ const DistrictReportPage = () => {
           size="small"
           value={selectedDate}
           onChange={handleDateChange}
-          sx={{
-            backgroundColor: "#fff",
-            borderRadius: 1,
-          }}
+          sx={{ backgroundColor: "#fff", borderRadius: 1 }}
         />
       </Box>
 
-      {/* States */}
+      {/* Loading / Error / No Data */}
       {loading ? (
         <Box display="flex" justifyContent="center" py={5}>
           <CircularProgress />
@@ -102,17 +90,16 @@ const DistrictReportPage = () => {
       ) : (
         <>
           {formsConfig.map(({ id, title }) => {
-            const form = getFormDataByKey(id);
+            const form = formData.find((f) => f.formKey === id);
             if (!form) return null;
 
-            return (
-              <Box key={id} mb={5}>
+            return form.entries.map((entry, index) => (
+              <Box key={entry.id} mb={5}>
                 {/* Section Header */}
                 <Typography
                   variant="h6"
                   sx={{
-                   backgroundColor: "#1976d2",
-
+                    backgroundColor: "#1976d2",
                     color: "white",
                     py: 1.2,
                     px: 2,
@@ -121,7 +108,7 @@ const DistrictReportPage = () => {
                     fontSize: "1.05rem",
                   }}
                 >
-                  {title}
+                  {title} {form.entries.length > 1 ? `(${index + 1})` : ""}
                 </Typography>
 
                 {/* Table */}
@@ -141,7 +128,7 @@ const DistrictReportPage = () => {
                       }}
                     >
                       <TableRow>
-                        {Object.keys(form.formData || {}).map((key) => (
+                        {Object.keys(entry.formData || {}).map((key) => (
                           <TableCell
                             key={key}
                             sx={{
@@ -165,7 +152,7 @@ const DistrictReportPage = () => {
                           "&:hover": { backgroundColor: "#FAFAFA" },
                         }}
                       >
-                        {Object.entries(form.formData || {}).map(([key, value]) => (
+                        {Object.entries(entry.formData || {}).map(([key, value]) => (
                           <TableCell
                             key={key}
                             sx={{
@@ -184,7 +171,7 @@ const DistrictReportPage = () => {
                   </Table>
                 </TableContainer>
               </Box>
-            );
+            ));
           })}
         </>
       )}

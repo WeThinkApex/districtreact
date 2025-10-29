@@ -9,7 +9,7 @@ import SideBar from '../SideBar/SideBar';
 import AdminProfile from '../AdminProfile/AdminProfile';
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import DistrictReportPage from "../AdminDashboard/DistrictReportPage";
-
+import FormDistrictReportPage from "../AdminDashboard/FormDistrictReportPage";
 import AddStudent from '../studentRelated/AddStudent';
 import SeeComplains from '../studentRelated/SeeComplains';
 import ShowStudents from '../studentRelated/ShowStudents';
@@ -82,10 +82,11 @@ const AdminDashboard = () => {
           <Route path="/Admin/dashboard" element={<AdminHomePage />} />
           <Route path="/Admin/profile" element={<AdminProfile />} />
           <Route path="/Admin/complains" element={<SeeComplains />} />
-<Route path="/districts/:districtName" element={<DistrictReportPage />} />
+        <Route path="/districts/:districtName" element={<DistrictReportPage />} />
+        <Route path="/form/:formKey" element={<FormDistrictReportPage />} />
           {/* Notice */}
-          <Route path="/Admin/addnotice" element={<AddNotice />} />
-          <Route path="/Admin/notices" element={<ShowNotices />} />
+          {/* <Route path="/Admin/addnotice" element={<AddNotice />} /> */}
+          {/* <Route path="/Admin/notices" element={<ShowNotices />} /> */}
 
           {/* Subject */}
           <Route path="/Admin/subjects" element={<ShowSubjects />} />
@@ -104,7 +105,7 @@ const AdminDashboard = () => {
 
           {/* Student */}
           <Route path="/Admin/addstudents" element={<AddStudent situation="Student" />} />
-          <Route path="/Admin/students" element={<ShowStudents />} />
+          <Route path="/Admin/districts" element={<ShowStudents />} />
           <Route path="/Admin/students/student/:id" element={<ViewStudent />} />
           <Route path="/Admin/students/student/attendance/:id" element={<StudentAttendance situation="Student" />} />
           <Route path="/Admin/students/student/marks/:id" element={<StudentExamMarks situation="Student" />} />
