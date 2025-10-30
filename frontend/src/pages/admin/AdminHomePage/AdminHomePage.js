@@ -1,44 +1,70 @@
 import React, { useEffect, useState } from "react";
 import {
-  Typography,
   Container,
-  Grid,
+  Typography,
+  CircularProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
   Box,
   Toolbar,
   CssBaseline,
   AppBar,
-  Button,
+  Tooltip,
 } from "@mui/material";
-import styled from "styled-components";
-import { useNavigate, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { formsFields } from "../../config/formsFields";
 import { formsConfig } from "../../config/formsConfig";
 import AccountMenu from "../../../components/AccountMenu/AccountMenu";
-import Logout from "../../Logout/Logout";
 
 const AdminHomePage = () => {
-  const [selectedForm, setSelectedForm] = useState("");
-  const { currentUser } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const formKey = "crimeData"; // Default form to load
+  const formInfo = formsConfig.find((f) => f.id === formKey);
+  const formTitle = formInfo ? formInfo.title : "Crime Data";
+  const fields = formsFields[formKey] || [];
 
   useEffect(() => {
-    console.log("Current District User:", currentUser);
-  }, [currentUser]);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/api/formdata/form/${formKey}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch data");
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Error loading data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [formKey]);
 
-  // ✅ When user clicks a form button, go to its dedicated page
-  const handleFormClick = (form) => {
-    setSelectedForm(form.title);
-    navigate(`/form/${form.id}`);
-  };
+  // Group by district
+  const groupedData = data.reduce((acc, item) => {
+    const district = item.createdBy || "Unknown District";
+    if (!acc[district]) acc[district] = [];
+    acc[district].push(item);
+    return acc;
+  }, {});
 
-  // ✅ Only first 14 forms are shown as per your design
-  const filteredForms = formsConfig.slice(0, 14);
+  // Flatten all district data
+  const allEntries = Object.entries(groupedData).flatMap(([district, items]) =>
+    items.map((entry) => ({ ...entry, district }))
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-
-      {/* 🔹 Top Bar */}
       <AppBar position="absolute" sx={{ backgroundColor: "#002b5c" }}>
         <Toolbar sx={{ pr: "24px" }}>
           <Typography
@@ -48,132 +74,142 @@ const AdminHomePage = () => {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            District Dashboard
+            District Dashboard – {formTitle}
           </Typography>
           <AccountMenu />
         </Toolbar>
       </AppBar>
 
-      {/* 🔹 Main Content */}
-      <Box component="main" sx={styles.boxStyled}>
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: "#f4f6f9",
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+          paddingBottom: "40px",
+        }}
+      >
         <Toolbar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Container maxWidth="lg" sx={{ mt: 1, mb: 5 }}>
-                {/* Header */}
-                <Typography
-                  variant="h4"
-                  sx={{
-                    mb: 3,
-                    textAlign: "center",
-                    color: "#002b5c",
-                    fontWeight: 700,
-                  }}
-                >
-                  🏛️ Andhra Pradesh Police – DSR Portal
-                </Typography>
+        <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{ mb: 3, color: "#002b5c", fontWeight: 700 }}
+          >
+            🏛️ Andhra Pradesh Police – {formTitle} Overview
+          </Typography>
 
-                {/* Buttons Grid */}
-                <Grid
-                  container
-                  spacing={3}
-                  justifyContent="center"
-                  alignItems="stretch"
-                >
-                  {filteredForms.map((form, index) => (
-                    <Grid item xs={12} sm={6} md={3} key={form.id}>
-                      <StyledButton
-                        color={colorCycle[index % colorCycle.length]}
-                        variant="contained"
-                        fullWidth
-                        onClick={() => handleFormClick(form)}
-                      >
-                        {form.title}
-                      </StyledButton>
-                    </Grid>
-                  ))}
-                </Grid>
+        {loading ? (
+  <Box display="flex" justifyContent="center" py={5}>
+    <CircularProgress />
+  </Box>
+) : error ? (
+  <Typography align="center" color="error">
+    {error}
+  </Typography>
+) : data.length === 0 ? (
+  <Typography align="center" color="textSecondary">
+    No records found.
+  </Typography>
+) : (
+  <Paper elevation={3} sx={{ borderRadius: 2, overflow: "hidden" }}>
+    <TableContainer>
+      <Table>
+        {/* Header Row */}
+        <TableHead>
+          <TableRow>
+            <TableCell
+              sx={{
+                backgroundColor: "#002b5c",
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: "1rem",
+                textAlign: "center",
+                borderRight: "1px solid #1a3e72",
+              }}
+            >
+              District
+            </TableCell>
+            {fields.map((f) => (
+              <TableCell
+                key={f.name}
+                sx={{
+                  backgroundColor: "#f3f8ff",
+                  color: "#002b5c",
+                  fontWeight: 700,
+                  fontSize: "1rem",
+                  borderBottom: "2px solid #dee3eb",
+                  textTransform: "capitalize",
+                }}
+              >
+                {f.label}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
 
-                {/* Info Section */}
-                <StyledPaper elevation={3}>
-                  {selectedForm ? (
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        textAlign: "center",
-                        color: "#1a237e",
-                        fontWeight: 600,
-                      }}
+        {/* Table Body */}
+        <TableBody>
+          {allEntries.map((entry, idx) => (
+            <TableRow
+              key={entry._id || idx}
+              hover
+              sx={{
+                backgroundColor: idx % 2 === 0 ? "#ffffff" : "#f9fcff",
+              }}
+            >
+              <TableCell
+                sx={{
+                  borderRight: "2px solid #002b5c",
+                  fontWeight: 600,
+                  color: "#002b5c",
+                  textAlign: "left",
+                  whiteSpace: "nowrap",
+                  width: "180px",
+                }}
+              >
+                {entry.district}
+              </TableCell>
+              {fields.map((f) => {
+                const text = entry.formData?.[f.name] || "-";
+                return (
+                  <TableCell
+                    key={`${entry._id}-${f.name}`}
+                    sx={{
+                      borderBottom: "1px solid #e0e0e0",
+                      color: "#333",
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    <Tooltip
+                      title={
+                        text && text !== "-" ? (
+                          <span style={{ whiteSpace: "pre-line" }}>{text}</span>
+                        ) : (
+                          ""
+                        )
+                      }
+                      arrow
+                      placement="top-start"
                     >
-                      You selected: {selectedForm}
-                    </Typography>
-                  ) : (
-                    <Typography
-                      variant="h6"
-                      sx={{ textAlign: "center", color: "#6c757d" }}
-                    >
-                      Please select a form to get started.
-                    </Typography>
-                  )}
-                </StyledPaper>
-              </Container>
-            }
-          />
-          {/* Logout Route */}
-          <Route path="/logout" element={<Logout />} />
-          {/* Redirect any invalid routes back to home */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+                      <span>{text}</span>
+                    </Tooltip>
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  </Paper>
+)}
+
+        </Container>
       </Box>
     </Box>
   );
-};
-
-/* 🎨 Styled Components */
-const StyledButton = styled(Button)`
-  padding: 16px 10px !important;
-  border-radius: 12px !important;
-  font-weight: 600 !important;
-  text-transform: none !important;
-  font-size: 14.5px !important;
-  height: 80px;
-  transition: all 0.25s ease-in-out !important;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const StyledPaper = styled(Box)`
-  padding: 24px;
-  margin-top: 40px;
-  border-radius: 16px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-`;
-
-/* 🌈 Button Colors */
-const colorCycle = [
-  "primary",
-  "secondary",
-  "success",
-  "info",
-  "warning",
-  "error",
-];
-
-/* 💅 Styles */
-const styles = {
-  boxStyled: {
-    backgroundColor: "#f4f6f9",
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-    paddingBottom: "40px",
-  },
 };
 
 export default AdminHomePage;

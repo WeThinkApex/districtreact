@@ -101,7 +101,7 @@ const { currentUser } = useSelector((state) => state.user);
                   <span style={{ color: "#003366", fontWeight: 700 }}>
                     {currentUser?.district || "Your District"}
                   </span>{" "}
-                  District
+                  District 👮‍♂️
                 </Typography>
 
                 {/* Buttons Grid */}
