@@ -31,8 +31,7 @@ const SidebarMenu = () => {
     { text: "Fertilizer Monitoring", path: "/form/fertilizerMonitoring" },
     { text: "All Districts", path: "/Admin/districts" },
 
-    // ✅ New Add Districts Link
-    { text: "Add Districts", path: "/form/addDistricts", icon: <LocationCityIcon /> },
+  
   ];
 
   return (
@@ -73,44 +72,10 @@ const SidebarMenu = () => {
       {/* Divider */}
       <Divider sx={{ my: 1 }} />
 
-      {/* User Section */}
-      <ListSubheader component="div" inset>
-        User
-      </ListSubheader>
+    
 
-      {/* User Link */}
-      <ListItemButton
-        component={Link}
-        to="/Admin/profile"
-        sx={{
-          pl: 3,
-          py: 1.5,
-          "&:hover": { backgroundColor: "transparent" },
-        }}
-      >
-        <ListItemIcon>
-          <AccountCircleOutlinedIcon
-            color={
-              location.pathname.startsWith("/Admin/profile")
-                ? "primary"
-                : "inherit"
-            }
-          />
-        </ListItemIcon>
-        <ListItemText
-          primary="User"
-          primaryTypographyProps={{
-            fontSize: "16px",
-            fontWeight: location.pathname.startsWith("/Admin/profile")
-              ? 600
-              : 400,
-            color: location.pathname.startsWith("/Admin/profile")
-              ? "primary.main"
-              : "text.primary",
-          }}
-        />
-      </ListItemButton>
-
+    
+   
       {/* Logout */}
       <ListItemButton
         component={Link}

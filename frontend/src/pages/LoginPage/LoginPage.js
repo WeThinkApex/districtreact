@@ -36,7 +36,7 @@ const LoginPage = ({ role }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (role === "Student") {
+    if (role === "District") {
       const rollNum = event.target.rollNumber.value;
       const password = event.target.password.value;
       if (!rollNum || !password) {
@@ -71,7 +71,7 @@ const LoginPage = ({ role }) => {
   useEffect(() => {
     if (status === 'success' || currentUser !== null) {
       if (currentRole === 'Admin') navigate('/Admin/dashboard');
-      else if (currentRole === 'Student') navigate('/Student/dashboard');
+      else if (currentRole === 'District') navigate('/Student/dashboard');
       else if (currentRole === 'Teacher') navigate('/Teacher/dashboard');
     } else if (status === 'failed') {
       setMessage(response);
@@ -94,14 +94,14 @@ const LoginPage = ({ role }) => {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className="login-left-section">
           <Box className="login-box">
             <Typography variant="h4" className="login-title">
-              {role === "Student" ? "District" : role} Login
+              {role === "District" ? "District" : role} Login
             </Typography>
             <Typography variant="subtitle1" className="login-subtitle">
               Welcome back! Please enter your details
             </Typography>
 
             <Box component="form" noValidate onSubmit={handleSubmit} className="login-form">
-              {role === "Student" ? (
+              {role === "District" ? (
                 <TextField
                   margin="normal"
                   required

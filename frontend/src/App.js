@@ -22,7 +22,7 @@ const App = () => {
           <Route path="/chooseasguest" element={<ChooseUser visitor="guest" />} />
 
           <Route path="/Adminlogin" element={<LoginPage role="Admin" />} />
-          <Route path="/Studentlogin" element={<LoginPage role="Student" />} />
+          <Route path="/districtLogin" element={<LoginPage role="District" />} />
           <Route path="/Teacherlogin" element={<LoginPage role="Teacher" />} />
 
           <Route path="/Adminregister" element={<AdminRegisterPage />} />
@@ -36,7 +36,7 @@ const App = () => {
         </>
       }
 
-      {currentRole === "Student" &&
+      {currentRole === "District" &&
         <>
           <DistrictDashboard />
         </>

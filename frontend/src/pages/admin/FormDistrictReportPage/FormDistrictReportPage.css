@@ -12,7 +12,7 @@
   color: #000 !important;
   text-transform: capitalize !important;
   letter-spacing: 1px;
-  font-size: 1.5rem !important;
+  font-size: 19px !important;
 }
 
 /* Paper */
@@ -44,7 +44,10 @@
   letter-spacing: 0.5px !important;
   opacity: 0.9;
 }
-
+.css-i1v8gv-MuiTableCell-root {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
 /* Table */
 .table-container {
   border-radius: 0 0 12px 12px;

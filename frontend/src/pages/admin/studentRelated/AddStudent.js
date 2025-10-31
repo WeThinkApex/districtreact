@@ -23,7 +23,7 @@ const AddStudent = ({ situation }) => {
     const [sclassName, setSclassName] = useState('')
 
     const adminID = currentUser._id
-    const role = "Student"
+    const role = "District"
     const attendance = []
 
     useEffect(() => {

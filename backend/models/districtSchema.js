@@ -5,7 +5,7 @@ let uuidv4;
   const uuid = await import("uuid");
   uuidv4 = uuid.v4;
 })();
-const studentSchema = new mongoose.Schema({
+const districtSchema = new mongoose.Schema({
   districtId: {
     type: String,
     default: () => uuidv4 && uuidv4(),
@@ -31,7 +31,7 @@ const studentSchema = new mongoose.Schema({
   // },
   role: {
     type: String,
-    default: "Student"
+    default: "District"
   },
   // examResult: [
   //     {
@@ -63,4 +63,4 @@ const studentSchema = new mongoose.Schema({
   // }]
 });
 
-module.exports = mongoose.model("student", studentSchema);
+module.exports = mongoose.model("district", districtSchema);

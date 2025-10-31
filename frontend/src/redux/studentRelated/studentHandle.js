@@ -11,7 +11,7 @@ export const getAllStudents = (id) => async (dispatch) => {
     dispatch(getRequest());
 
     try {
-        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/Students/${id}`);
+        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/districts/${id}`);
         console.log("reulst in sudents",result)
         if (result.data.message) {
             dispatch(getFailed(result.data.message));

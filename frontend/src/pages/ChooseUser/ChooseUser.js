@@ -43,7 +43,7 @@ const ChooseUser = ({ visitor }) => {
         setLoader(true);
         dispatch(loginUser(fields, user));
       } else {
-        navigate('/Studentlogin');
+        navigate('/districtLogin');
       }
     }
   };
