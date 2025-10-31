@@ -143,12 +143,12 @@ const AdminRegisterPage = () => {
                 }}
               />
 
-              <Grid container className="remember-container">
+              {/* <Grid container className="remember-container">
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
                 />
-              </Grid>
+              </Grid> */}
 
               <LightPurpleButton
                 type="submit"

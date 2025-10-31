@@ -20,7 +20,7 @@ const Logout = () => {
 
   return (
     <div className="logout-container">
-      <h1 className="logout-username">{currentUser?.name || 'User'}</h1>
+      <h1 className="logout-username">{currentUser?.name || ''}</h1>
       <p className="logout-message">Are you sure you want to log out?</p>
 
       <div className="logout-buttons">

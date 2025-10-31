@@ -20,7 +20,8 @@ const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { currentRole, currentUser } = useSelector((state) => state.user);
-
+console.log("rola en discy",currentUser)
+console.log("role",currentRole)
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
@@ -76,8 +77,15 @@ const AccountMenu = () => {
         fontWeight: 600,
       }}
     >
-      {String(currentUser.name || 'U').charAt(0).toUpperCase()}
+      {String(
+        currentRole === 'District'
+          ? currentUser.district || 'D'
+          : currentUser.name || 'U'
+      )
+        .charAt(0)
+        .toUpperCase()}
     </Avatar>
+
     <Box>
       <Typography
         variant="subtitle1"
@@ -87,41 +95,42 @@ const AccountMenu = () => {
           lineHeight: 1.3,
         }}
       >
-        {currentUser.name || 'User Name'}
+        {currentRole === 'District'
+          ? currentUser.district || 'District'
+          : currentUser.name || 'User Name'}
       </Typography>
-      <Typography
-        variant="body2"
-        sx={{
-          color: 'text.secondary',
-          mt: 0.3,
-          fontSize: '0.9rem',
-        }}
-      >
-        {currentUser.email || 'user@email.com'}
-      </Typography>
+
+      {/* Show email only for admin */}
+      {currentRole === 'admin' && (
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'text.secondary',
+            mt: 0.3,
+            fontSize: '0.9rem',
+          }}
+        >
+          {currentUser.email || 'user@email.com'}
+        </Typography>
+      )}
     </Box>
   </Box>
 </Paper>
 
+<Divider sx={{ my: 1 }} />
 
-        <Divider sx={{ my: 1 }} />
+<MenuItem component={Link} to="/logout">
+  <ListItemIcon>
+    <Logout fontSize="small" sx={{ color: '#002b5c' }} />
+  </ListItemIcon>
+  <Typography variant="body2" sx={{ fontWeight: 500 }}>
+    Logout
+  </Typography>
+</MenuItem>
 
-        {/* --- Profile --- */}
-        {/* <MenuItem component={Link} to={`/${currentRole}/profile`}>
-          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            View Profile
-          </Typography>
-        </MenuItem> */}
 
-        {/* --- Logout --- */}
-        <MenuItem component={Link} to="/logout">
-          <ListItemIcon>
-            <Logout fontSize="small" sx={{ color: '#002b5c' }} />
-          </ListItemIcon>
-          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-            Logout
-          </Typography>
-        </MenuItem>
+
+       
       </Menu>
     </>
   );

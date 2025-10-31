@@ -154,10 +154,10 @@ const LoginPage = ({ role }) => {
                 }}
               />
 
-              <Grid container className="login-options">
+              {/* <Grid container className="login-options">
                 <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
                 <StyledLink href="#">Forgot password?</StyledLink>
-              </Grid>
+              </Grid> */}
 
               <LightPurpleButton
                 type="submit"
